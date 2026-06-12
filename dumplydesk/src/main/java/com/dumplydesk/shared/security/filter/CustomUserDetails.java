@@ -4,6 +4,7 @@ import com.dumplydesk.modules.users.domain.User;
 import com.dumplydesk.modules.users.repository.UserRepository;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,15 +15,12 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 @Component
+@RequiredArgsConstructor
 public class CustomUserDetails implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final EntityManagerFactory entityManagerFactory;
 
-    public CustomUserDetails(UserRepository userRepository, EntityManagerFactory entityManagerFactory) {
-        this.userRepository = userRepository;
-        this.entityManagerFactory = entityManagerFactory;
-    }
 
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

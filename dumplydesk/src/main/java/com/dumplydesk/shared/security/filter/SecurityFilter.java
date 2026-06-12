@@ -1,11 +1,10 @@
 package com.dumplydesk.shared.security.filter;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.dumplydesk.modules.users.domain.User;
 import com.dumplydesk.modules.users.repository.UserRepository;
 import com.dumplydesk.shared.security.token.ValidateTokenService;
-import com.zaxxer.hikari.HikariConfig;
 import jakarta.servlet.FilterChain;
+import com.dumplydesk.modules.users.domain.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -42,12 +41,13 @@ public class SecurityFilter extends OncePerRequestFilter {
         String token = recoverToken(request);
         try {
             var decodedJWT = validateTokenService.validateToken(token);
-            User user = new User();
 
             if (decodedJWT == null) {
                 writeInvalidTokenResponse(response);
                 return;
             }
+            //Email via JWT
+            String email = decodedJWT.getSubject();
             //Claim da role via JWT
             String role = decodedJWT.getClaim("role").asString();
 
@@ -56,7 +56,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             );
 
             var userDetails =
-                    new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
+                    new org.springframework.security.core.userdetails.User(email, "", authorities);
 
             var authentication =
                     new UsernamePasswordAuthenticationToken(userDetails, token, authorities);

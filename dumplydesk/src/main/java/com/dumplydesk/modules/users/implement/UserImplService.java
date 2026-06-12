@@ -1,4 +1,4 @@
-package com.dumplydesk.modules.users.service;
+package com.dumplydesk.modules.users.implement;
 
 import com.dumplydesk.modules.users.dto.request.CreateUserRequest;
 import com.dumplydesk.modules.users.dto.request.UpdateUserRequest;
@@ -6,6 +6,10 @@ import com.dumplydesk.modules.users.dto.response.CreateUserResponse;
 import com.dumplydesk.modules.users.dto.response.UserListResponse;
 import com.dumplydesk.modules.users.dto.response.UserUpdateResponse;
 import com.dumplydesk.modules.users.interfaces.UserInterface;
+import com.dumplydesk.modules.users.service.UserCreationService;
+import com.dumplydesk.modules.users.service.UserDeleteService;
+import com.dumplydesk.modules.users.service.UserListService;
+import com.dumplydesk.modules.users.service.UserUpdateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

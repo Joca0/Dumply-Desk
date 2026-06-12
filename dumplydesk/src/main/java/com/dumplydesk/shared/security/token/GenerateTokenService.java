@@ -15,7 +15,7 @@ import java.time.ZoneOffset;
 @Service
 public class GenerateTokenService {
 
-    @Value("${token.secret}")
+    @Value("${jwt.secret}")
     private String secret;
 
     //Geração do token JWT, com claim da ROLE
@@ -26,6 +26,7 @@ public class GenerateTokenService {
                     .withIssuer("auth-login")
                     .withSubject(user.getEmail())
                     .withClaim("role", user.getRole().name())
+                    .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
             return token;
         } catch (JWTCreationException exception){
@@ -33,7 +34,7 @@ public class GenerateTokenService {
         }
     }
 
-    // Método da geração da expiração do token JWT
+    // Método da geração da expiração do token JWT (Definido para 12 horas)
     public Instant generateExpirationDate() {
         return LocalDateTime.now().plusHours(12).toInstant(ZoneOffset.ofHours(-3));
     }

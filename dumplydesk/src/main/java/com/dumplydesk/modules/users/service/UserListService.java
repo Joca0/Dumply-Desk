@@ -4,6 +4,7 @@ import com.dumplydesk.modules.users.domain.User;
 import com.dumplydesk.modules.users.dto.response.UserListResponse;
 import com.dumplydesk.modules.users.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,13 +12,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UserListService {
 
     private final UserRepository userRepository;
 
-    public UserListService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public List<UserListResponse> listUsers() {
         return userRepository.findAll()
