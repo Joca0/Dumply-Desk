@@ -39,11 +39,13 @@ public class UserController {
         return ResponseEntity.ok(userInterface.listUsers());
     }
 
+    //Listagem de usuário por ID
     @GetMapping("/{id}")
     public ResponseEntity<UserListResponse> getUserById(@PathVariable UUID id) {
         return ResponseEntity.ok(userInterface.getUserById(id));
     }
 
+    //Exclusão de usuário por ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
         userInterface.deleteUser(id);
