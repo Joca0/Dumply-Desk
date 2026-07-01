@@ -23,7 +23,7 @@ public class UserController {
     private final UserInterface userInterface;
 
     //Criação de usuário
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userInterface.createUser(request));
     }

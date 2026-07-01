@@ -87,7 +87,7 @@
 	<dependencyManagement>
 		<dependencies>
 		</dependencies>
-	</dependencyManagement>w
+	</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
